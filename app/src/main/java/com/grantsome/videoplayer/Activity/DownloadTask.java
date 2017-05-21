@@ -29,7 +29,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
 
     private int lastProgress;
 
-    private long contentLength;
+    public static long contentLength;
 
     public DownloadTask(DownloadListener listener) {
         this.listener = listener;
@@ -84,23 +84,20 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
                 int total = 0;
                 int len;
                 while ((len = is.read(b)) != -1) {
-                    if (isCanceled) {
-                        return TYPE_CANCELED;
-                    } else if (isPaused) {
-                        return TYPE_PAUSED;
-                    } else {
+                    {
                         total += len;
                         savedFile.write(b, 0, len);
                         // 计算已下载的百分比
                         int progress = (int) ((total + downloadedLength) * 100 / contentLength);
                         Log.d("progeress","progress " + progress);
                         publishProgress(progress);
+                        listener.onProgress(progress);
                     }
                 }
                 mInputStream.close();
                 connection.disconnect();
-                return TYPE_SUCCESS;
             }
+            return TYPE_SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -159,7 +156,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
     }
 
 
-    private long getLength(final String address) {
+    public long getLength(final String address) {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(address);

@@ -201,22 +201,29 @@ public class HttpUtils {
         return null;
     }
 
-    public static int getFileSize(String urlString) throws IOException,Exception{
-        int lenght = 0;
-        String url = urlString;
-//URL mUrl = new URL(urlString);
-        URL mUrl = new URL(url);
-        HttpURLConnection conn = (HttpURLConnection) mUrl.openConnection();
-        conn.setConnectTimeout(5*1000);
-        conn.setRequestMethod("GET");
-        conn.connect();
-        Log.d("length= ","链接"+"");
-        int responseCode = conn.getResponseCode();
-// 判断请求是否成功处理
-        lenght = conn.getContentLength();
-        Log.d("length= ",lenght+"");
-
-        return lenght;
+    public static int getLength(String address) {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(address);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(1000 * 600);
+            connection.setConnectTimeout(10000);
+            connection.setRequestMethod("GET");
+            connection.connect();
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                int contentLength = connection.getContentLength();
+                return contentLength;
+            } else {
+                ToastUtils.showError("获取文件长度时连接出错");
+                return 0;
+            }
+        } catch (Exception e) {
+            //ToastUtils.showError("获取文件长度时失败");
+            e.printStackTrace();
+        }finally {
+            connection.disconnect();
+        }
+        return 0;
     }
 
 

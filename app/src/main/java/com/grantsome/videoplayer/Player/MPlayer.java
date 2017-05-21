@@ -14,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.grantsome.videoplayer.Util.HttpUtils;
-
 /**
  * Description:
  */
@@ -200,7 +198,7 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
         currentVideoHeight=0;
         player.reset();
         try{
-            duration = HttpUtils.getFileSize(url);
+            duration = player.getDuration();
             Log.d("时间",""+duration);
         }catch (Exception e){
             e.printStackTrace();

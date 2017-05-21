@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -33,13 +34,13 @@ import com.grantsome.videoplayer.Util.CircleImage;
 import com.grantsome.videoplayer.Util.ImageLoader;
 import com.grantsome.videoplayer.Util.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.grantsome.videoplayer.Player.MPlayer.currentPosition;
-import static com.grantsome.videoplayer.Player.MPlayer.duration;
 
 /**
  * Description:
@@ -66,6 +67,7 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     private ImageButton downloadButton;
     private int position;
     private DownloadService.DownloadBinder downloadBinder;
+    private File file;
 
     private ServiceConnection connection = new ServiceConnection() {
 
@@ -199,8 +201,12 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
                    return;
                 }
                 Log.w("download","开始执行");
-                ToastUtils.showHint("正在准备下载");
-                downloadBinder.startDownload(contentlist.get(position).getVideo_uri());
+                if(!isSaved(contentBean.getVideo_uri())) {
+                    ToastUtils.showHint("正在准备下载");
+                    downloadBinder.startDownload(contentBean.getVideo_uri());
+                }else {
+                    ToastUtils.showHint("已经下载过了,无需继续下载");
+                }
         }
     }
 
@@ -208,9 +214,14 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
         String mUrl = contentBean.getVideo_uri();
         if(mUrl.length()>0){
             Log.e("wuwang","播放->"+mUrl);
-            ToastUtils.showHint("很用力的加载中");
             try {
                 player.setSource(mUrl);
+                if(isSaved(mUrl)){
+                    ToastUtils.showHint("很用力的从本地加载中");
+                    player.setSource(file.toString());
+                }else {
+                    ToastUtils.showHint("很用力的从网络加载中");
+                }
                 if(player.isPlaying()) {
                     player.pause();
                     setInvisable();
@@ -241,7 +252,6 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
     //开启进度条
     private void seekBarChanging() {
         seekBar_progress.setMax(1024*100);
-        Log.d("duration",duration+"");
         seekBar_progress.setProgress(player.get());
         timer = new Timer();
         timerTask = new TimerTask() {
@@ -306,6 +316,17 @@ public class PlayerActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             default:
+        }
+    }
+
+    private boolean isSaved(String url){
+        String fileName = url.substring(url.lastIndexOf("/"));
+        String directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
+        file = new File(directory + fileName);
+        if(file.exists()){
+            return true;
+        }else {
+            return false;
         }
     }
 
