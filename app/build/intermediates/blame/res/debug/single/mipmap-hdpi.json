@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\default_avatar.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\src\\main\\res\\mipmap-hdpi\\default_avatar.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    }
+]

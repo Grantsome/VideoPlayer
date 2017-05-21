@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import java.io.IOException;
+import com.grantsome.videoplayer.Util.HttpUtils;
 
 /**
  * Description:
@@ -41,7 +41,26 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
 
     private int currentVideoWidth;              //当前视频宽度
     private int currentVideoHeight;             //当前视频高度
-    private int currentPosition = (int) 0;
+
+    public static int currentPosition;
+    public static int duration;
+
+
+    public void seekTo(int progress){
+        if(player!=null)
+           player.seekTo(progress);
+        else return;
+    }
+
+    /*
+    public int getDuration(){
+        if(player!=null)
+            return player.getDuration();
+        else
+            return 0;
+
+    }
+    */
 
     private void createPlayerIfNeed(){
         if(null==player){
@@ -65,7 +84,25 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
             if(mPlayListener!=null){
                 mPlayListener.onStart(this);
             }
+            if(player!=null){
+                currentVideoWidth = player.getCurrentPosition();
+            }
+            currentPosition = player.getCurrentPosition();
         }
+
+    }
+
+    public int get(){
+        try {
+            if (player != null) {
+                currentPosition = player.getCurrentPosition();
+                return currentPosition;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return currentPosition;
+
     }
 
     private void playPause(){
@@ -75,6 +112,8 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
             if(mPlayListener!=null){
                 mPlayListener.onPause(this);
             }
+            currentPosition = player.getCurrentPosition();
+
         }
     }
 
@@ -160,6 +199,12 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
         currentVideoWidth=0;
         currentVideoHeight=0;
         player.reset();
+        try{
+            duration = HttpUtils.getFileSize(url);
+            Log.d("时间",""+duration);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         try {
             player.setDataSource(url);
             try {
@@ -167,9 +212,8 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
             }catch (Exception e){
                 e.printStackTrace();
             }
-
             log("异步准备视频");
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new MPlayerException("set source error",e);
         }
     }
@@ -234,9 +278,6 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
     @Override
     public void onPrepared(MediaPlayer mp) {
         log("视频准备完成");
-        if (currentPosition > 0) {
-            player.seekTo(currentPosition);
-        }
         isMediaPrepared=true;
         playStart();
     }
@@ -269,10 +310,14 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
             isSurfaceCreated=true;
             //此举保证以下操作下，不会黑屏。（或许还是会有手机黑屏）
             //暂停，然后切入后台，再切到前台，保持暂停状态
+
             if(player!=null){
                 player.setDisplay(holder);
                 //不加此句360f4不会黑屏、小米note1会黑屏，其他机型未测
-                player.seekTo(player.getCurrentPosition());
+                if (currentPosition > 0) {
+                    player.seekTo(player.getCurrentPosition());
+                }
+
             }
             log("surface被创建");
             playStart();
@@ -295,4 +340,12 @@ public class MPlayer implements IMPlayer,MediaPlayer.OnBufferingUpdateListener,
     private void log(String content){
         Log.e("MPlayer",content);
     }
+
+
+    /*
+    public int getPlayPosition(){
+            return currentPosition;
+    }
+    */
+
 }

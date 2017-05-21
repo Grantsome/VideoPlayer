@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_thumb_down_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_thumb_down_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_play_arrow_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_play_arrow_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_thumb_up_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_thumb_up_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_skip_next_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_skip_next_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_reply_all_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_reply_all_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_skip_previous_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_skip_previous_black_24dp.png"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_arrow_downward_black_24dp.png",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_arrow_downward_black_24dp.png"
+    }
+]

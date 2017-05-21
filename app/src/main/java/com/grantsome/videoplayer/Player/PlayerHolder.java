@@ -59,7 +59,7 @@ public class PlayerHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     private void initView(View itemView){
         mPlayerView= (SurfaceView) itemView.findViewById(R.id.mPlayerView);
-        mPlayButton = (ImageButton) itemView.findViewById(R.id.mPlay);
+        mPlayButton = (ImageButton) itemView.findViewById(R.id.media_controller_play_pause);
         mAvatar = (CircleImage) itemView.findViewById(R.id.avatar);
         mAuthorName = (TextView) itemView.findViewById(R.id.authorName);
         mVideoTitle = (TextView) itemView.findViewById(R.id.videoTitle);
@@ -99,9 +99,11 @@ public class PlayerHolder extends RecyclerView.ViewHolder implements View.OnClic
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PlayerActivity.class);
                 Bundle data = new Bundle();
+                data.putSerializable("contentBeanList", mContentList);
                 data.putSerializable("contentBean",mContentList.get(getLayoutPosition()));
                 intent.putExtra("data",data);
                 v.getContext().startActivity(intent);
+
             }
         });
     }
@@ -134,17 +136,18 @@ public class PlayerHolder extends RecyclerView.ViewHolder implements View.OnClic
     @Override
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.mPlayerView:
-            case R.id.mPlay:
+            /*
+            case R.id.:
                 Intent intent = new Intent(view.getContext(), PlayerActivity.class);
                 Bundle data = new Bundle();
                 data.putSerializable("contentBean",mContentList.get(getLayoutPosition()));
                 intent.putExtra("data",data);
                 view.getContext().startActivity(intent);
                 break;
-
+                */
         }
     }
+
 
 
 

@@ -26,6 +26,10 @@
         <activity android:name=".Activity.PlayerActivity">
 
         </activity>
+        <service
+            android:name=".Activity.DownloadService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

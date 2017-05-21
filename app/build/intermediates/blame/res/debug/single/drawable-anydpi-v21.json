@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_play_arrow_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_play_arrow_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_reply_all_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_reply_all_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_skip_next_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_skip_next_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.3.0\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_skip_previous_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_skip_previous_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\25.3.0\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_arrow_downward_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_arrow_downward_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_thumb_down_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_thumb_down_black_24dp.xml"
+    },
+    {
+        "merged": "G:\\Test\\VideoPlayer\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_thumb_up_black_24dp.xml",
+        "source": "G:\\Test\\VideoPlayer\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_thumb_up_black_24dp.xml"
+    }
+]

@@ -1,0 +1,15 @@
+package com.grantsome.videoplayer.Activity;
+
+public interface DownloadListener {
+
+    void onProgress(int progress);
+
+    void onSuccess();
+
+    void onFailed();
+
+    void onPaused();
+
+    void onCanceled();
+
+}

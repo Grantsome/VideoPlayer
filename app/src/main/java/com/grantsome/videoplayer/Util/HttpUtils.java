@@ -133,7 +133,7 @@ public class HttpUtils {
         }).start();
     }
 
-    private static byte[] read(InputStream is) throws IOException {
+    public static byte[] read(InputStream is) throws IOException {
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] temp = new byte[1024];
         int len;
@@ -200,4 +200,24 @@ public class HttpUtils {
         }
         return null;
     }
+
+    public static int getFileSize(String urlString) throws IOException,Exception{
+        int lenght = 0;
+        String url = urlString;
+//URL mUrl = new URL(urlString);
+        URL mUrl = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection) mUrl.openConnection();
+        conn.setConnectTimeout(5*1000);
+        conn.setRequestMethod("GET");
+        conn.connect();
+        Log.d("length= ","链接"+"");
+        int responseCode = conn.getResponseCode();
+// 判断请求是否成功处理
+        lenght = conn.getContentLength();
+        Log.d("length= ",lenght+"");
+
+        return lenght;
+    }
+
+
 }

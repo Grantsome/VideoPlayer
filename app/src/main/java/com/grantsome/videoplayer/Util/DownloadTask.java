@@ -2,13 +2,17 @@ package com.grantsome.videoplayer.Util;
 
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
+
+import com.grantsome.videoplayer.Activity.DownloadListener;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-/*
 
 public class DownloadTask extends AsyncTask<String, Integer, Integer> {
 
@@ -25,6 +29,8 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
     private boolean isPaused = false;
 
     private int lastProgress;
+
+    private long contentLength;
 
     public DownloadTask(DownloadListener listener) {
         this.listener = listener;
@@ -51,15 +57,25 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
                 // 已下载字节和文件总字节相等，说明已经下载完成了
                 return TYPE_SUCCESS;
             }
+            /*
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     // 断点下载，指定从哪个字节开始下载
                     .addHeader("RANGE", "bytes=" + downloadedLength + "-")
                     .url(downloadUrl)
                     .build();
-            Response response = client.newCall(request).execute();
-            if (response != null) {
-                is = response.body().byteStream();
+            */
+            HttpURLConnection connection =null;
+            URL url = new URL(downloadUrl);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(10000);
+            connection.setRequestMethod("GET");
+            Log.d("contentLength",contentLength+"");
+            connection.setRequestProperty("RANGE","bytes="+contentLength+"-");
+            InputStream mInputStream = connection.getInputStream();
+            if (mInputStream!= null) {
+                is = mInputStream;
                 savedFile = new RandomAccessFile(file, "rw");
                 savedFile.seek(downloadedLength); // 跳过已下载的字节
                 byte[] b = new byte[1024];
@@ -78,7 +94,8 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
                         publishProgress(progress);
                     }
                 }
-                response.body().close();
+                mInputStream.close();
+                connection.disconnect();
                 return TYPE_SUCCESS;
             }
         } catch (Exception e) {
@@ -139,18 +156,25 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
     }
 
     private long getContentLength(String downloadUrl) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(downloadUrl)
-                .build();
-        Response response = client.newCall(request).execute();
-        if (response != null && response.isSuccessful()) {
-            long contentLength = response.body().contentLength();
-            response.close();
-            return contentLength;
-        }
-        return 0;
+        getLength(downloadUrl);
+        return contentLength;
     }
 
+    private void getLength(final String address){
+        HttpURLConnection connection =null;
+                try {
+                    URL url = new URL(address);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setReadTimeout(5000);
+                    connection.setConnectTimeout(10000);
+                    connection.setRequestMethod("GET");
+                    if(connection.getResponseCode()==HttpURLConnection.HTTP_OK){
+                        contentLength = connection.getContentLength();
+                    }else {
+                        ToastUtils.showError("获取文件长度出错");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
 }
-*/
